@@ -13,12 +13,12 @@ Frequency - daily
 Range - unknown
 
 #### Measurements
-1. Precipitations (tenths of mm)
-2. Temperature Max (tenths of degrees C)
-3. Temperature Min (tenths of degrees C)
-4. Temperature Average (tenths of degrees C)
-5. Snowfall (mm)
-6. Snow Depth (mm)
+1. Precipitations (tenths of mm, PRCP)
+2. Temperature Max (tenths of degrees C, TMAX)
+3. Temperature Min (tenths of degrees C, TMIN)
+4. Temperature Average (tenths of degrees C, TAXN)
+5. Snowfall (mm, SNOW)
+6. Snow Depth (mm SNWD)
 
 # Documentation
 
