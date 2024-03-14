@@ -2,7 +2,7 @@
 
 # Table of Contents
 1. [About](#about)
-2. [Documention]
+2. [Documention](#documentation)
 2. [Citation](#citation)
 
 # About
