@@ -51,6 +51,8 @@ if __name__ == "__main__":
         
         filter_df = check_empty_columns(df)
         key = filter_columns(filter_df)
+
+        # check the key to see which folder to put csv file in Filtered Data
         if key == 'pt': filter_df.to_csv(os.path.join(output_loc, 'Perfect', item), index=False)
         if key == 'tp': filter_df.to_csv(os.path.join(output_loc, 'Temperature', item), index=False)
         if key == 'pr': filter_df.to_csv(os.path.join(output_loc, 'Precipitation', item), index=False)
