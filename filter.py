@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+from collections import Counter
 
 def filter_csv(input_file, columns):
     df_in = pd.read_csv(input_file, dtype=str)
@@ -56,7 +57,46 @@ def run_filter_primary():
         if key == 'tp': filter_df.to_csv(os.path.join(output_loc, 'Temperature', item), index=False)
         if key == 'pr': filter_df.to_csv(os.path.join(output_loc, 'Precipitation', item), index=False)
 
+def get_time_range():
+    #set the current dir to where the script is located
+    os.chdir(os.path.abspath( os.path.dirname( __file__ ) ))
+
+    input_loc_pt = r'Filtered Example Data\\Perfect\\'
+    input_loc_tp = r'Filtered Example Data\\Precipitation\\'
+    input_loc_pr = r'Filtered Example Data\\Temperature\\'
+    list_loc = [input_loc_pr, input_loc_pt, input_loc_tp]
+
+    #initialize data structure to keep track of frequency
+    start_ct = Counter({})
+    end_ct = Counter({})
+
+    #get info on each .csv file
+    for i in list_loc:
+        for item in os.listdir(i):
+            item_path = i + item
+            df = pd.read_csv(item_path)
+
+            start_date = df['DATE'].min()
+            end_date = df['DATE'].max()
+
+            start_ct.update([start_date])
+            end_ct.update([end_date])
+    
+    # get the most frequent start date
+    mtComStart_ct = start_ct.most_common(1)[0][1]
+    mtComStart_it = [item for item, count in start_ct.items() if count == mtComStart_ct]
+
+    # get the most frequent end date
+    mtComEnd_ct = end_ct.most_common(1)[0][1]
+    mtComEnd_it = [item for item, count in end_ct.items() if count == mtComEnd_ct]
+
+    # print the most frequent start and end date
+    print("Most frequent Start Date - count:", mtComStart_ct, " item:", mtComStart_it)
+    print("Most frequent End Date - count:", mtComEnd_ct, " item:", mtComEnd_it)
+
 if __name__ == "__main__":
     #run first filter function
-    run_filter_primary()
+    #run_filter_primary()
 
+    #get range of time
+    get_time_range()
