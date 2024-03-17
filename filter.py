@@ -34,8 +34,7 @@ def filter_columns(df):
         else: return 'tp' #add to temp data
     else: return 'pr' #only precipitation data
 
-
-if __name__ == "__main__":
+def run_filter_primary():
     #columns names in csv file
     col = ["TMAX", 'TMIN', 'TAXN', 'PRCP', 'SNOW', 'SNWD', 'DATE', 'STATION']
 
@@ -43,7 +42,7 @@ if __name__ == "__main__":
     os.chdir(os.path.abspath( os.path.dirname( __file__ ) ))
 
     input_loc = r'Example Data\\'
-    output_loc = r'Filtered Data'
+    output_loc = r'Filtered Example Data'
 
     #filter file in dir to perfect & other folder based contents
     for item in os.listdir(input_loc):
@@ -57,4 +56,7 @@ if __name__ == "__main__":
         if key == 'tp': filter_df.to_csv(os.path.join(output_loc, 'Temperature', item), index=False)
         if key == 'pr': filter_df.to_csv(os.path.join(output_loc, 'Precipitation', item), index=False)
 
+if __name__ == "__main__":
+    #run first filter function
+    run_filter_primary()
 
