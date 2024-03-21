@@ -3,14 +3,18 @@
 # Table of Contents
 1. [About](#about)
 2. [Documention](#documentation)
-2. [Citation](#citation)
+4. [Citation](#citation)
 
 # About
 ## Topic - Exploring Weather Trends and Extreme Events Around the World
 
+This project takes data from the National Oceanic and Atmospheric Administration(NOAA), specifically the data collected from around the world through the Global Historical Climate Network (GHCN). It uses the dataset to make trend anaylsis, extreme event anaylsis and data visualization of regional areas and globally. 
+
+## Questions
+
 #### Data Range
 Frequency - daily
-Range - unknown
+Range -  1901-01-01 ~ 2023-12-31
 
 #### Measurements
 1. Precipitations (tenths of mm, PRCP)
