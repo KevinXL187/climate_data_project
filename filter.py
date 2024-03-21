@@ -94,6 +94,27 @@ def get_time_range():
     print("Most frequent Start Date - count:", mtComStart_ct, " item:", mtComStart_it)
     print("Most frequent End Date - count:", mtComEnd_ct, " item:", mtComEnd_it)
 
+def code_keydic():
+    #set the current dir to where the script is located
+    os.chdir(os.path.abspath( os.path.dirname( __file__ ) ))
+    
+    code_loc = r'Other\\ghcnd-countries.txt'
+    code_key = {}
+        
+    with open(code_loc) as f:
+        data = f.readlines()
+        
+    for line in data:
+        code, country = line.split(' ', 1)
+        code_key[code] = country
+
+    return code_key
+
+def code_to_country(txt, key):
+    code = txt[:2]
+    
+    return key[code]
+    
 if __name__ == "__main__":
     #run first filter function
     #run_filter_primary()
