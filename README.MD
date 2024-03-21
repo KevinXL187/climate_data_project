@@ -33,11 +33,11 @@ Range -  1901-01-01 ~ 2023-12-31
     [optional body]
     [optional footor(s)]
 ##### Commit Type
-1. feat - new function being included
-2. fix - bug fixed
+1. feat - new functionalities or features being included
+2. fix - fixed a bug or corrected an error
 3. refactor - refactor code that is not feat or fix
 4. docs - updates to documentation
-5. style - changes not that do not affect meaning of code
+5. style - changes not that do not affect the functionality or meaning of the code
 6. test - new tests or changes to old test
 7. perf - performance improvements
 9. build - changes that affect the build system or external dependencies
