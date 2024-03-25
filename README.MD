@@ -51,5 +51,9 @@ National Oceanic and Atmospheric Administration (NOAA). "Global Historical Clima
 #### Journal Article
 Menne, M.J., I. Durre, R.S. Vose, B.E. Gleason, and T.G. Houston, 2012:  An overview of the Global Historical Climatology Network-Daily Database.  Journal of Atmospheric and Oceanic Technology, 29, 897-910, doi:10.1175/JTECH-D-11-00103.1.
 
+Jackson, Stephen T.. "climate change". Encyclopedia Britannica, 19 Mar. 2024, https://www.britannica.com/science/climate-change. Accessed 21 March 2024.
+
+https://www.un.org/en/climatechange/what-is-climate-change
+
 #### Dataset Source
 Menne, M.J., I. Durre, B. Korzeniewski, S. McNeill, K. Thomas, X. Yin, S. Anthony, R. Ray, R.S. Vose, B.E.Gleason, and T.G. Houston, 2012: Global Historical Climatology Network - Daily (GHCN-Daily), Version 3.31. NOAA National Climatic Data Center. http://doi.org/10.7289/V5D21VHZ [02/09/2024].
