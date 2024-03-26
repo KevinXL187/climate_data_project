@@ -134,4 +134,4 @@ if __name__ == "__main__":
 
     #get range of time
     #get_time_range()
-    pdf_threshold()
+    pdf_to_xml()
