@@ -55,5 +55,7 @@ Jackson, Stephen T.. "climate change". Encyclopedia Britannica, 19 Mar. 2024, ht
 
 https://www.un.org/en/climatechange/what-is-climate-change
 
+https://wmo.int/site/world-weather-and-climate-extremes-archive
+
 #### Dataset Source
 Menne, M.J., I. Durre, B. Korzeniewski, S. McNeill, K. Thomas, X. Yin, S. Anthony, R. Ray, R.S. Vose, B.E.Gleason, and T.G. Houston, 2012: Global Historical Climatology Network - Daily (GHCN-Daily), Version 3.31. NOAA National Climatic Data Center. http://doi.org/10.7289/V5D21VHZ [02/09/2024].
