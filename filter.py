@@ -1,4 +1,4 @@
-import os, pdfquery
+import os
 import pandas as pd
 from collections import Counter
 
@@ -115,23 +115,10 @@ def code_to_country(txt, key):
     
     return key[code]
     
-def pdf_to_xml():
-    #set the current dir to where the script is located
-    os.chdir(os.path.abspath( os.path.dirname( __file__ ) ))
-    
-    loc = r'Other\\'
-    pdf = pdfquery.PDFQuery(loc + 'Table_Extreme_Records_30Jan2024.pdf')
-    pdf.load()
-    pdf.tree.write(loc + 'Table_Extreme_Records_30Jan2024.xml', pretty_print=True)
-
-def get_xml_data():
-    #line 1435 to 2409
-    #line 822 to 906
-    pass
 if __name__ == "__main__":
     #run first filter function
     #run_filter_primary()
 
     #get range of time
     #get_time_range()
-    pdf_to_xml()
+    pass
