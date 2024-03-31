@@ -10,20 +10,6 @@
 
 This project takes data from the National Oceanic and Atmospheric Administration(NOAA), specifically the data collected from around the world through the Global Historical Climate Network (GHCN). It uses the dataset to make trend anaylsis, extreme event anaylsis and data visualization of regional areas and globally. 
 
-## Questions
-
-#### Data Range
-Frequency - daily
-Range -  1901-01-01 ~ 2023-12-31
-
-#### Measurements
-1. Precipitations (tenths of mm, PRCP)
-2. Temperature Max (tenths of degrees C, TMAX)
-3. Temperature Min (tenths of degrees C, TMIN)
-4. Temperature Average (tenths of degrees C, TAXN)
-5. Snowfall (mm, SNOW)
-6. Snow Depth (mm SNWD)
-
 # Documentation
 
 ## Git Convention
