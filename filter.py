@@ -99,6 +99,14 @@ def filter_threshold():
     output_loc = r'Filtered Example Data\\Perfect_thres'
     thershold_datapath = r'Other\\Table_Extreme_Records_Hemisphere.csv'
     
+    #countries in each hemisphere
+    with open(r'Other\\both_hemipshere.txt') as f:
+        whole = f.readlines()
+    with open(r'Other\\northern_hemisphere.txt') as f:
+        nth_hs = f.readlines()
+    with open(r'Other\\southern_hemisphere.txt') as f:
+        sth_hs = f.readlines()
+    
     #country code dic
     countrycode_dic = code_keydic()
     
@@ -119,7 +127,10 @@ def filter_threshold():
     
     for item in os.listdir(data_loc):
         code = item[:2]
-        country_name = code_to_country(code)   
+        country_name = code_to_country(code)
+        if country_name in whole:pass
+        elif country_name in nth_hs:pass
+        elif country_name in sth_hs: pass
     
 def get_time_range():
     #set the current dir to where the script is located
