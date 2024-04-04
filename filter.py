@@ -75,6 +75,7 @@ def north_southHS():
     locProp_nrow = 'NorthernHemisphereCountriesProportionInNorthernHemisphere'
     locProp_srow = 'InSouthernHemisphere'
     
+    #append countries to each respective hemisphere file
     for index, row in nth_df.iterrows():
         if row[locProp_nrow] == 'Fully': nth_hs.write(row['country'] + '\n')
         elif row[locProp_nrow] == ' Partly' or row[locProp_nrow] == 'Mostly':
@@ -84,6 +85,11 @@ def north_southHS():
         if row[locProp_srow] == 'Entirely': sth_hs.write(row['country'] + '\n')
         elif row[locProp_srow] == 'Partially' or row[locProp_srow] == 'Mostly':
             whole.write(row['country'] + '\n')
+           
+    #closes file 
+    nth_hs.close()
+    sth_hs.close()
+    whole.close()
     
 def filter_threshold():
     #set the current dir to where the script is located
