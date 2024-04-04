@@ -128,7 +128,16 @@ def filter_threshold():
     for item in os.listdir(data_loc):
         code = item[:2]
         country_name = code_to_country(code)
-        if country_name in whole:pass
+        df = pd.read_csv(item)
+        
+        if country_name in whole:
+            if df['TMAX'].max() > max(tempMx): continue
+            if df['TMIN'].min() < min(tempMn): continue
+            if df['PRCP'].max() > max(prcp): continue
+            
+            orgi_loc = data_loc + item
+            new_loc = output_loc + item
+            os.replace()
         elif country_name in nth_hs:pass
         elif country_name in sth_hs: pass
     
