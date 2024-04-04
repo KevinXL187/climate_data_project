@@ -57,6 +57,64 @@ def run_filter_primary():
         if key == 'tp': filter_df.to_csv(os.path.join(output_loc, 'Temperature', item), index=False)
         if key == 'pr': filter_df.to_csv(os.path.join(output_loc, 'Precipitation', item), index=False)
 
+def north_southHS():
+    #set the current dir to where the script is located
+    os.chdir(os.path.abspath( os.path.dirname( __file__ ) ))
+    
+    nth_loc = r'Other/northern-hemisphere-countries-2024.csv'
+    sth_loc = r'Other/southern-hemisphere-countries-2024.csv'
+    
+    #hemisphere dataframes
+    nth_df = pd.read_csv(nth_loc)
+    sth_df = pd.read_csv(sth_loc)
+    
+    nth_hs = open(r'Other/northern_hemisphere.txt', 'w')
+    sth_hs = open(r'Other/southern_hemisphere.txt', 'w')
+    whole = open(r'Other/both_hemisphere.txt', 'w')
+    
+    locProp_nrow = 'NorthernHemisphereCountriesProportionInNorthernHemisphere'
+    locProp_srow = 'InSouthernHemisphere'
+    
+    for index, row in nth_df.iterrows():
+        if row[locProp_nrow] == 'Fully': nth_hs.write(row['country'] + '\n')
+        elif row[locProp_nrow] == ' Partly' or row[locProp_nrow] == 'Mostly':
+            whole.write(row['country'] + '\n')
+    
+    for index, row in sth_df.iterrows():
+        if row[locProp_srow] == 'Entirely': sth_hs.write(row['country'] + '\n')
+        elif row[locProp_srow] == 'Partially' or row[locProp_srow] == 'Mostly':
+            whole.write(row['country'] + '\n')
+    
+def filter_threshold():
+    #set the current dir to where the script is located
+    os.chdir(os.path.abspath( os.path.dirname( __file__ ) ))
+    
+    data_loc = r'Filtered Example Data\\Perfect'
+    output_loc = r'Filtered Example Data\\Perfect_thres'
+    thershold_datapath = r'Other\\Table_Extreme_Records_Hemisphere.csv'
+    
+    #country code dic
+    countrycode_dic = code_keydic()
+    
+    #threshold dataframe
+    thres_df = pd.read_csv(thershold_datapath)
+    tempMx, tempMn, prcp = [], [], []
+    
+    for index, row in thres_df.iterrows():
+        if row['Characteristic'] == 'TMAX':
+            if row['Hemisphere'] == 'Northern': tempMx.append(row['Value'])
+            elif row['Hemisphere'] == 'Southern': tempMx.append(row['Value'])
+        elif row['Characteristic'] == 'TMIN':
+            if row['Hemisphere'] == 'Northern': tempMn.append(row['Value'])
+            elif row['Hemisphere'] == 'Southern': tempMn.append(row['Value'])            
+        elif row['Characteristic'] == 'PRCP':
+            if row['Hemisphere'] == 'Northern': prcp.append(row['Value'])
+            elif row['Hemisphere'] == 'Southern': prcp.append(row['Value'])
+    
+    for item in os.listdir(data_loc):
+        code = item[:2]
+        country_name = code_to_country(code)   
+    
 def get_time_range():
     #set the current dir to where the script is located
     os.chdir(os.path.abspath( os.path.dirname( __file__ ) ))
@@ -121,4 +179,4 @@ if __name__ == "__main__":
 
     #get range of time
     #get_time_range()
-    pass
+    north_southHS()
