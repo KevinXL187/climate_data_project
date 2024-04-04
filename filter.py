@@ -135,11 +135,30 @@ def filter_threshold():
             if df['TMIN'].min() < min(tempMn): continue
             if df['PRCP'].max() > max(prcp): continue
             
+            #move files after data is validated
             orgi_loc = data_loc + item
             new_loc = output_loc + item
-            os.replace()
-        elif country_name in nth_hs:pass
-        elif country_name in sth_hs: pass
+            os.replace(orgi_loc, new_loc)
+
+        elif country_name in nth_hs:
+            if df['TMAX'].max() > tempMx[0]: continue
+            if df['TMIN'].min() < tempMn[0]: continue
+            if df['PRCP'].max() > prcp[0]: continue
+
+            #move files after data is validated
+            orgi_loc = data_loc + item
+            new_loc = output_loc + item
+            os.replace(orgi_loc, new_loc)
+
+        elif country_name in sth_hs:
+            if df['TMAX'].max() > tempMx[1]: continue
+            if df['TMIN'].min() < tempMn[1]: continue
+            if df['PRCP'].max() > prcp[1]: continue
+
+            #move files after data is validated
+            orgi_loc = data_loc + item
+            new_loc = output_loc + item
+            os.replace(orgi_loc, new_loc)
     
 def get_time_range():
     #set the current dir to where the script is located
@@ -205,4 +224,5 @@ if __name__ == "__main__":
 
     #get range of time
     #get_time_range()
-    north_southHS()
+    #north_southHS()
+    filter_threshold()
