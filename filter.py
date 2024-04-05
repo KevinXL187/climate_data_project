@@ -1,4 +1,4 @@
-import os
+import os, re
 import pandas as pd
 from collections import Counter
 
@@ -100,12 +100,12 @@ def filter_threshold():
     thershold_datapath = r'Other\\Table_Extreme_Records_Hemisphere.csv'
     
     #countries in each hemisphere
-    with open(r'Other\\both_hemipshere.txt') as f:
-        whole = f.readlines()
-    with open(r'Other\\northern_hemisphere.txt') as f:
-        nth_hs = f.readlines()
-    with open(r'Other\\southern_hemisphere.txt') as f:
-        sth_hs = f.readlines()
+    with open(r'Other\both_hemisphere.txt') as f:
+        whole = [line.strip() for line in f.readlines()]
+    with open(r'Other\northern_hemisphere.txt') as f:
+        nth_hs = [line.strip() for line in f.readlines()]
+    with open(r'Other\southern_hemisphere.txt') as f:
+        sth_hs = [line.strip() for line in f.readlines()]
     
     #country code dic
     countrycode_dic = code_keydic()
@@ -117,18 +117,20 @@ def filter_threshold():
     for index, row in thres_df.iterrows():
         if row['Characteristic'] == 'TMAX':
             if row['Hemisphere'] == 'Northern': tempMx.append(row['Value'])
-            elif row['Hemisphere'] == 'Southern': tempMx.append(row['Value'])
+            if row['Hemisphere'] == 'Southern': tempMx.append(row['Value'])
         elif row['Characteristic'] == 'TMIN':
             if row['Hemisphere'] == 'Northern': tempMn.append(row['Value'])
-            elif row['Hemisphere'] == 'Southern': tempMn.append(row['Value'])            
+            if row['Hemisphere'] == 'Southern': tempMn.append(row['Value'])
         elif row['Characteristic'] == 'PRCP':
             if row['Hemisphere'] == 'Northern': prcp.append(row['Value'])
-            elif row['Hemisphere'] == 'Southern': prcp.append(row['Value'])
+            if row['Hemisphere'] == 'Southern': prcp.append(row['Value'])
     
     for item in os.listdir(data_loc):
         code = item[:2]
-        country_name = code_to_country(code)
-        df = pd.read_csv(item)
+        country_name = code_to_country(code, countrycode_dic)
+
+        orgi_loc = os.path.join(data_loc, item)
+        df = pd.read_csv(orgi_loc)
         
         if country_name in whole:
             if df['TMAX'].max() > max(tempMx): continue
@@ -136,8 +138,7 @@ def filter_threshold():
             if df['PRCP'].max() > max(prcp): continue
             
             #move files after data is validated
-            orgi_loc = data_loc + item
-            new_loc = output_loc + item
+            new_loc = os.path.join(output_loc, item)
             os.replace(orgi_loc, new_loc)
 
         elif country_name in nth_hs:
@@ -146,8 +147,7 @@ def filter_threshold():
             if df['PRCP'].max() > prcp[0]: continue
 
             #move files after data is validated
-            orgi_loc = data_loc + item
-            new_loc = output_loc + item
+            new_loc = os.path.join(output_loc, item)
             os.replace(orgi_loc, new_loc)
 
         elif country_name in sth_hs:
@@ -156,8 +156,7 @@ def filter_threshold():
             if df['PRCP'].max() > prcp[1]: continue
 
             #move files after data is validated
-            orgi_loc = data_loc + item
-            new_loc = output_loc + item
+            new_loc = os.path.join(output_loc, item)
             os.replace(orgi_loc, new_loc)
     
 def get_time_range():
@@ -209,6 +208,12 @@ def code_keydic():
         
     for line in data:
         code, country = line.split(' ', 1)
+
+        if '[' in country:
+            country = re.sub(r'\[[^\]]*\]', '', country)
+            country = re.sub(r'\s{2,}', ' ', country)
+        country = country.strip()
+
         code_key[code] = country
 
     return code_key
@@ -217,7 +222,7 @@ def code_to_country(txt, key):
     code = txt[:2]
     
     return key[code]
-    
+
 if __name__ == "__main__":
     #run first filter function
     #run_filter_primary()
