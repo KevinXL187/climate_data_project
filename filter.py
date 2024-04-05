@@ -223,6 +223,10 @@ def code_to_country(txt, key):
     
     return key[code]
 
+def handle_missing_data():
+    pass
+    #if more than 1/2 of a coloumn is empty it is removed from data calaucations
+
 if __name__ == "__main__":
     #run first filter function
     #run_filter_primary()
