@@ -133,27 +133,27 @@ def filter_threshold():
         df = pd.read_csv(orgi_loc)
         
         if country_name in whole:
-            if df['TMAX'].max() > max(tempMx): continue
-            if df['TMIN'].min() < min(tempMn): continue
-            if df['PRCP'].max() > max(prcp): continue
+            if df['TMAX'].max()/10 > max(tempMx): continue
+            if df['TMIN'].min()/10 < min(tempMn): continue
+            if df['PRCP'].max()/10 > max(prcp): continue
             
             #move files after data is validated
             new_loc = os.path.join(output_loc, item)
             os.replace(orgi_loc, new_loc)
 
         elif country_name in nth_hs:
-            if df['TMAX'].max() > tempMx[0]: continue
-            if df['TMIN'].min() < tempMn[0]: continue
-            if df['PRCP'].max() > prcp[0]: continue
+            if df['TMAX'].max()/10 > tempMx[0]: continue
+            if df['TMIN'].min()/10 < tempMn[0]: continue
+            if df['PRCP'].max()/10 > prcp[0]: continue
 
             #move files after data is validated
             new_loc = os.path.join(output_loc, item)
             os.replace(orgi_loc, new_loc)
 
         elif country_name in sth_hs:
-            if df['TMAX'].max() > tempMx[1]: continue
-            if df['TMIN'].min() < tempMn[1]: continue
-            if df['PRCP'].max() > prcp[1]: continue
+            if df['TMAX'].max()/10 > tempMx[1]: continue
+            if df['TMIN'].min()/10 < tempMn[1]: continue
+            if df['PRCP'].max()/10 > prcp[1]: continue
 
             #move files after data is validated
             new_loc = os.path.join(output_loc, item)
