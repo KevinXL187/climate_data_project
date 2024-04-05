@@ -1,7 +1,7 @@
 Hemisphere,Characteristic,Value
 Northern,TMAX,56.7
-Southern ,TMAX,50.7
+Southern,TMAX,50.7
 Northern,TMIN,-69.6
-Southern ,TMIN,-89.2
-Northern,PRCP,1 633.98
-Southern ,PRCP,1 825
+Southern,TMIN,-89.2
+Northern,PRCP,1633.98
+Southern,PRCP,1825
