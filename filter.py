@@ -225,8 +225,25 @@ def code_to_country(txt, key):
     return key[code]
 
 def handle_missing_data():
-    pass
-    #if more than 1/2 of a coloumn is empty it is removed from data calaucations
+    #set the current dir to where the script is located
+    os.chdir(os.path.abspath( os.path.dirname( __file__ ) ))
+    
+    data_loc = r'Filtered Example Data\\Perfect Threshold'
+    output_loc = r'Filtered Example Data\\Ready Data'
+
+    for item in os.listdir(data_loc):
+        orgi_loc = os.path.join(data_loc, item)
+        new_loc = os.path.join(output_loc, item)
+
+        df =  pd.read_csv(orgi_loc)
+
+        count = 0
+        for col in df.columns:
+            # nan percentage is the percentage of missing data
+            nan_percentage = (df[col].isna().sum() / len(df)) * 100
+            if nan_percentage > 50: count += 1
+
+        if count == 0:  os.replace(orgi_loc, new_loc)
 
 if __name__ == "__main__":
     #run first filter function
@@ -235,4 +252,5 @@ if __name__ == "__main__":
     #get range of time
     #get_time_range()
     #north_southHS()
-    filter_threshold()
+    #filter_threshold()
+    handle_missing_data()
