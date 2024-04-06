@@ -96,7 +96,7 @@ def filter_threshold():
     os.chdir(os.path.abspath( os.path.dirname( __file__ ) ))
     
     data_loc = r'Filtered Example Data\\Perfect'
-    output_loc = r'Filtered Example Data\\Perfect_thres'
+    output_loc = r'Filtered Example Data\\Perfect Threshold'
     thershold_datapath = r'Other\\Table_Extreme_Records_Hemisphere.csv'
     
     #countries in each hemisphere
@@ -132,6 +132,7 @@ def filter_threshold():
         orgi_loc = os.path.join(data_loc, item)
         df = pd.read_csv(orgi_loc)
         
+        # check which hemisphere the country is in
         if country_name in whole:
             if df['TMAX'].max()/10 > max(tempMx): continue
             if df['TMIN'].min()/10 < min(tempMn): continue
