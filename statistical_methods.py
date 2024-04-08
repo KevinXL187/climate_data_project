@@ -1,5 +1,11 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+import ipywidgets as widgets
+
+from filter import code_keydic
+from IPython.display import display
+
 import os
 
 # Data Aggregation
@@ -20,7 +26,7 @@ def find_first_last_occurrence(lst):
 
     return occurrences
 
-def temporal_data():
+def monthy_yearly_data():
     data_loc = r'Filtered Data\\Ready Data'
     output_loc =  r'Filtered Data\\Data Aggregation'
     
@@ -77,5 +83,42 @@ def temporal_data():
         country_monthly_avg.to_csv(os.path.join(output_loc, f'monthly_avg_{ccode}.csv'))
         country_yearly_avg.to_csv(os.path.join(output_loc, f'yearly_avg_{ccode}.csv'))
 
+def plot_year(dfs_by_year, year, country_name):
+        df = dfs_by_year[year]
+
+        plt.figure(figsize=(8,6))
+        plt.bar(df['Month'], df['TMAX'], color='blue')
+        plt.xlabel('Month')
+        plt.ylabel(f'Temperature Maximum in {country_name} during {year}')
+
+        plt.show()
+
+def visualize_monthly():
+    data_loc = r'Filtered Data\\Data Aggregation'
+
+    file_list = os.listdir(data_loc)
+    monthy_list = [file for file in file_list if 'monthly' in file]
+
+    for country_file in monthy_list:
+        key_dic = code_keydic()
+        country, ext = country_file.split('.')
+        country_name =  key_dic[country[-2:]]
+
+        #group by year column, and divde into seperate dataframes based on year
+        file_path = os.path.join(data_loc, country_file)
+        country_df = pd.read_csv(file_path)
+        year_grouped = country_df.groupby('Year')
+        dfs_by_year = {}
+        for year, group in year_grouped: dfs_by_year[year] = group.copy()
+
+        year_slider = widgets.IntSlider(min=min(dfs_by_year.keys()), max=max(dfs_by_year.keys()), step=1, description='Year:', continuous_update=False)
+
+        display(year_slider)
+        widgets.interactive(plot_year, year=year_slider, country_name=widgets.fixed(country_name), dfs_by_year=widgets.fixed(dfs_by_year))
+
+def visualize_yearly():
+    pass
+
 if __name__ == "__main__":
-    temporal_data()
+    #monthy_yearly_data()
+    visualize_monthly()
