@@ -86,15 +86,21 @@ def monthy_yearly_data():
 def plot_year(dfs_by_year, year, country_name):
         df = dfs_by_year[year]
 
-        plt.figure(figsize=(8,6))
-        plt.bar(df['Month'], df['TMAX'], color='blue')
+        #merge dfs to create df with all 12 months, even if data is missing for those months
+        month_df = pd.DataFrame({'Month': range(1, 13)})
+        df = pd.merge(month_df, df, on='Month', how='left')
+
+        plt.figure(figsize=(8, 6))
+        
+        plt.bar(df['Month'], df['TMAX'].fillna(0), color='blue')
         plt.xlabel('Month')
         plt.ylabel(f'Temperature Maximum in {country_name} during {year}')
+        plt.xticks(range(1, 13))
 
         plt.show()
 
 def visualize_monthly():
-    data_loc = r'Filtered Data\\Data Aggregation'
+    data_loc = r'Filtered Example Data\\Data Aggregation'
 
     file_list = os.listdir(data_loc)
     monthy_list = [file for file in file_list if 'monthly' in file]
@@ -114,6 +120,7 @@ def visualize_monthly():
         year_slider = widgets.IntSlider(min=min(dfs_by_year.keys()), max=max(dfs_by_year.keys()), step=1, description='Year:', continuous_update=False)
 
         display(year_slider)
+        
         widgets.interactive(plot_year, year=year_slider, country_name=widgets.fixed(country_name), dfs_by_year=widgets.fixed(dfs_by_year))
 
 def visualize_yearly():
