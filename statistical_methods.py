@@ -63,7 +63,7 @@ def monthy_yearly_data():
         country_monthly_avg = country_monthly_avg.iloc[:, :-3]
         country_yearly_avg = country_yearly_avg.iloc[:, :-3]
 
-        #
+        # get the mean for every year and mean for every month
         country_monthly_avg  = country_monthly_avg.groupby(['Year', 'Month']).mean()
         country_yearly_avg = country_yearly_avg.groupby(['Year']).mean()
 
