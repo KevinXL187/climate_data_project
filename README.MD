@@ -1,4 +1,4 @@
-# Climate Data Science Project
+# Climate Data Project
 
 # Table of Contents
 1. [About](#about)
